@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Users\Xanderpc\Documents\C#_Testing\Git\plantpod-pwa\PlantPod\bin\Release\net5.0\publish\</_PublishTargetUrl>
+    <History>True|2021-12-17T15:15:33.5525683Z;True|2021-12-17T14:00:16.1549061+01:00;True|2021-12-16T11:14:23.2155733+01:00;True|2021-12-15T15:18:05.5398970+01:00;True|2021-12-14T18:01:34.7023195+01:00;</History>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,40 @@
+﻿@page "/"
+
+@inject NavigationManager NavManager
+@inject IJSRuntime JS
+@inject Blazored.LocalStorage.ILocalStorageService storage
+@inject Data.User user
+@inject Data.Arduino arduino
+
+<div class="index-section">
+    <h3>Hallo, @userName</h3>
+    <div class="plant-section">
+        <h4>@plantName</h4>
+        <img src="img/plant.png" />
+    </div>
+</div>
+
+@code {
+    private string userName;
+    private string plantName;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            // Check if user is logged in otherwise send to login
+            if (!user.CheckLogin())
+            {
+                NavManager.NavigateTo("/login");
+            }
+            // Grab user info to display
+            userName = user.getUsername();
+            // Grab plant info to display
+            plantName = await arduino.getPlantName(user.getId());
+            await JS.InvokeAsync<string>("showNavmenu", true);
+
+            // Refresh html
+            StateHasChanged();
+        }
+    }
+}

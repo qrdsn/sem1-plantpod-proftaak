@@ -1,0 +1,64 @@
+﻿@page "/login"
+
+@using DataLibrary
+@using PlantPod.Models
+@using Microsoft.Extensions.Configuration
+@inject IDataAccess _data
+@inject IConfiguration _config
+@inject NavigationManager NavManager
+@inject IJSRuntime JS
+@inject Blazored.LocalStorage.ILocalStorageService storage
+@inject Data.User user
+
+<div class="login-section">
+    <img src="img/logo.png" />
+    <h3>Inloggen</h3>
+    @if (Messages != null)
+    {
+	    @foreach (var error in Messages)
+	    {
+		    <p class="error">@error</p>
+	    }
+    }
+    <div class="form">
+        <label for="username">Gebruikersnaam</label>
+        <input type="text" name="username" @bind="inputUsername" />
+        <label for="password">Wachtwoord</label>
+        <input type="password" name="password" @bind="inputPassword" />
+        <button class="primary-button" @onclick="LoginUser">Inloggen</button>
+        <a class="secondary-button" href="/Register">Registreren</a>
+    </div>
+</div>
+
+
+@code {
+    private string inputUsername;
+    private string inputPassword;
+    List<string> Messages = new List<string>();
+
+    private async Task LoginUser()
+    {
+        // attempt a login with given data otherwise display error messages
+        Messages = await user.LoginUser(inputUsername, inputPassword);
+        // No errors, send user to pair page
+        if (Messages.Count == 0)
+        {
+            NavManager.NavigateTo("/pair");
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            // Check if user is logged in otherwise send to login
+            if (user.CheckLogin())
+            {
+                NavManager.NavigateTo("/");
+            }
+            await JS.InvokeAsync<string>("showNavmenu", false);
+            // Refresh html
+            StateHasChanged();
+        }
+    }
+}

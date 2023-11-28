@@ -1,0 +1,50 @@
+﻿@page "/pair"
+
+@using DataLibrary
+@using PlantPod.Models
+@using Microsoft.Extensions.Configuration
+@inject IDataAccess _data
+@inject IConfiguration _config
+@inject NavigationManager NavManager
+@inject IJSRuntime JS
+@inject Data.User user
+
+@inject Blazored.LocalStorage.ILocalStorageService storage
+
+<div class="pair-section">
+    <img src="img/logo.png" />
+    <h3>PlantPod aanmaken</h3>
+    <div class="form">
+        <label for="arduino_id">Arduino koppel nummer</label>
+        <input type="text" name="arduino_id" />
+        <label for="name">Naam PlantPod</label>
+        <input type="text" name="name" />
+        <button class="primary-button">Aanmaken</button>
+        <a class="secondary-button" @onclick="logout">Uitloggen</a>
+    </div>
+    <a href="/">Go anyways</a>
+</div>
+
+@code {
+    public void logout() {
+        // log the user out and send to login
+        user.logoutUser();
+        NavManager.NavigateTo("/login");
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            // Check if user is logged in otherwise send to login
+            if (!user.CheckLogin())
+            {
+                NavManager.NavigateTo("/login");
+            }
+            await JS.InvokeAsync<string>("showNavmenu", false);
+
+            // Refresh html
+            StateHasChanged();
+        }
+    }
+}

@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Users\Xanderpc\Desktop\Test</_PublishTargetUrl>
+    <History>True|2021-12-13T22:33:05.2006843Z;True|2021-12-13T23:24:28.0261832+01:00;True|2021-12-13T23:23:52.1618410+01:00;True|2021-12-13T23:23:04.6762879+01:00;True|2021-12-13T23:22:07.5298039+01:00;True|2021-12-13T23:20:47.2052551+01:00;True|2021-12-13T23:12:29.5644983+01:00;</History>
+  </PropertyGroup>
+</Project>

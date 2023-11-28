@@ -1,0 +1,50 @@
+﻿@page "/overview"
+@inject IJSRuntime JS
+@inject NavigationManager NavManager
+@inject Data.Arduino arduino
+@inject Data.User user
+
+<div class="overview-section">
+    <h3>Alles over @plantName</h3>
+    <ul class="list">
+        <li>
+            <a href="/reading/water">
+                <p>Water</p>
+                <i class="fas fa-chevron-right"></i>
+            </a>
+        </li>
+        <li>
+            <a href="/reading/light">
+                <p>Licht</p>
+                <i class="fas fa-chevron-right"></i>
+            </a>
+        </li>
+        <li>
+            <a href="/reading/environment">
+                <p>Omgeving</p>
+                <i class="fas fa-chevron-right"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+@code {
+    private string plantName;
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            // Check if user is logged in otherwise send to login
+            if (!user.CheckLogin())
+            {
+                NavManager.NavigateTo("/login");
+            }
+            // Grab plant data to display
+            plantName = await arduino.getPlantName(user.getId());
+            await JS.InvokeAsync<string>("showNavmenu", true);
+
+            // Refresh html
+            StateHasChanged();
+        }
+    }
+}

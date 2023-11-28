@@ -1,0 +1,77 @@
+﻿@page "/reading/light"
+@using Microsoft.AspNetCore.Mvc
+@using System.Collections.Generic
+@using Microsoft.Extensions.Configuration
+@using System
+@inject IJSRuntime JS
+@inject NavigationManager NavManager
+@inject Data.Arduino arduino
+@inject Data.User user
+
+<div class="topnav">
+    <a href="overview"><i class="fas fa-chevron-left"></i></a>
+    <h3>Licht</h3>
+</div>
+<div class="light-section">
+    @if (imageSource is not null)
+    {
+        <img src="@imageSource" />
+    }
+
+
+    <div class="graph">
+        <h4>Licht lezing</h4>
+        <canvas class="my-4 h-25" id="lightGraph"></canvas>
+    </div>
+</div>
+
+@code {
+    private string Message { get; set; }
+    private string? imageSource;
+
+    private async void displayGraph(List<string> labels, List<decimal> readingData, string elementid)
+    {
+        // Try to call the javascript function and otherwise save the errormessage
+        try
+        {
+            // The first parameter is the function name in javascript and the rest are additional paremeters
+            Message = await JS.InvokeAsync<string>("ShowGraph", labels, readingData, elementid);
+        }
+        catch (JSException ex)
+        {
+            Message = ex.Message;
+        }
+    }
+
+    // Wait untill everything is done loading before we call in any javascript to prevent errors
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            // Get graph data and display
+            var data = await arduino.loadData("lightGraph", "light", 10);
+            displayGraph(data.Item1, data.Item2, data.Item3);
+            await JS.InvokeAsync<string>("showNavmenu", false);
+            
+            // Check if user is logged in otherwise send to login
+            if (!user.CheckLogin())
+            {
+                NavManager.NavigateTo("/login");
+            }
+
+            // Randomly display light_on or light_off
+            Random random = new Random();
+            if (random.Next(2) == 1)
+            {
+                imageSource = $"img/licht/licht_aan.png";
+            }
+            else
+            {
+                imageSource = $"img/licht/licht_uit.png";
+            }
+
+            // Refresh html
+            StateHasChanged();
+        }
+    }
+}

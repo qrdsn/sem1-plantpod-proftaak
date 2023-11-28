@@ -1,0 +1,449 @@
+@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
+
+html, body {
+    font-family: 'Roboto', Helvetica, Arial, sans-serif;
+    background-image: url("../img/background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+}
+
+a, .btn-link {
+    color: #0366d6;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+.content {
+    padding-top: 1.1rem;
+    padding-bottom: 80px !important;
+}
+
+.valid.modified:not([type=checkbox]) {
+    outline: 1px solid #26b050;
+}
+
+.invalid {
+    outline: 1px solid red;
+}
+
+.validation-message {
+    color: red;
+}
+
+#blazor-error-ui {
+    background: lightyellow;
+    bottom: 0;
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+    display: none;
+    left: 0;
+    padding: 0.6rem 1.25rem 0.7rem 1.25rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+#blazor-error-ui .dismiss {
+    cursor: pointer;
+    position: absolute;
+    right: 0.75rem;
+    top: 0.5rem;
+}
+/* ===== Self added css phone ===== */
+@media only screen and (max-width: 600px) {
+    /* Global */
+    .underline {
+        text-decoration: underline;
+    }
+    .primary-button {
+        background-color: #00DA2E;
+        border: none;
+        height: 50px;
+        border-radius: 10px;
+        box-shadow: 0 10px 20px rgb(0 0 0 / 19%), 0 6px 6px rgb(0 0 0 / 23%);
+        font-size: 22px;
+        color: #FFF;
+        margin: 0 0 10px 0;
+    }
+    .secondary-button {
+        background-color: #696969;
+        border: none;
+        height: 50px;
+        border-radius: 10px;
+        box-shadow: 0 10px 20px rgb(0 0 0 / 19%), 0 6px 6px rgb(0 0 0 / 23%);
+        font-size: 22px;
+        color: #FFF;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+    }
+    .warning-button {
+        width: 100%;
+        background-color: #FF1826;
+        border: none;
+        height: 50px;
+        border-radius: 10px;
+        box-shadow: 0 10px 20px rgb(0 0 0 / 19%), 0 6px 6px rgb(0 0 0 / 23%);
+        font-size: 22px;
+        color: #FFF;
+        margin: 0 0 10px 0;
+    }
+    /* Navbar */
+    .active {
+        background-color: #26B143;
+    }
+
+    .bottombar {
+        background-color: #2BCF4E;
+        width: 100%;
+        height: 60px;
+        position: fixed;
+        bottom: 0;
+    }
+
+    .navmenu {
+        display: flex;
+        width: 100%;
+        height: 100%;
+    }
+
+    .navmenu ul {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .navmenu ul li {
+        list-style: none;
+        font-size: 35px;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .navmenu ul li a {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+    }
+
+    .navmenu ul li a i {
+        color: #009F00;
+    }
+    /* Section styling */
+    .login-section, .register-section, .pair-section, .index-section, .overview-section, .water-section, .settings-section, .light-section, .environment-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 27px 0 27px 0;
+    }
+
+    .login-section img, .register-section img, .pair-section img, .index-section img {
+        width: 75%;
+    }
+
+    .login-section h3, .register-section h3, .pair-section h3, .settings-section {
+        color: #373030;
+        padding: 5px 0;
+    }
+
+    .login-section .error, .register-section error, .pair-section .error, .index-section .error {
+        line-height: 0.4;
+        color: #e62020;
+        font-size: 18px;
+    }
+
+    /* Register / Pair */
+    .register-section .form input:nth-child(4), .pair-section .form input:nth-child(4) {
+        margin-bottom: 10px !important;
+    }
+    .register-section .form input:nth-child(5), .pair-section .form input:nth-child(5) {
+        margin-bottom: 20px !important;
+    }
+
+    /* Index */
+    .index-section h3 {
+        color: #FFF;
+        padding: 5px 0;
+    }
+
+    .index-section .plant-section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        background-color: #FFF;
+        border-radius: 10px;
+        box-shadow: 0 10px 20px rgb(0 0 0 / 19%), 0 6px 6px rgb(0 0 0 / 23%);
+        padding: 15px;
+    }
+
+    .index-section .plant-section h4 {
+        padding: 0 0 15px 0;
+    }
+    /* Overview */
+    .overview-section h3 {
+        color: #FFF;
+        padding: 5px 0;
+    }
+    .overview-section .list {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 0;
+        margin: 0;
+    }
+    .overview-section .list li {
+        width: 100%;
+        list-style: none;
+    }
+    .overview-section .list li a {
+        background-color: #FFF;
+        padding: 15px;
+        border-radius: 10px;
+        width: 100%;
+        box-shadow: 0 10px 20px rgb(0 0 0 / 19%), 0 6px 6px rgb(0 0 0 / 23%);
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: #373030;
+        font-size: 18px;
+        text-decoration: none;
+    }
+    .overview-section .list li a:hover {
+        background-color: rgba(220,220,220);
+    }
+    .overview-section .list li a p {
+        padding: 0;
+        margin: 0;
+    }
+    /* Settings */
+    .settings-section h3 {
+        color: #FFF !important;
+    }
+    .settings-section .form label {
+        color: #FFF !important;
+    }
+    /* Water */
+    .water-section img {
+        width: 50% !important;
+        margin-bottom: 15px;
+    }
+    /* Licht */
+    .light-section img {
+        width: 30% !important;
+        margin-bottom: 15px;
+    }
+    /* Reading sections */
+    .water-section, .light-section, .environment-section {
+        margin-top: 50px;
+    }
+    .water-section .graph, .light-section .graph, .environment-section .graph {
+        width: 100%;
+        background-color: #FFF;
+        border-radius: 10px;
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 15px;
+        box-shadow: 0 10px 20px rgb(0 0 0 / 19%), 0 6px 6px rgb(0 0 0 / 23%);
+    }
+    .water-section .graph h4, .light-section .graph h4, .environment-section .graph h4 {
+        font-size: 18px;
+        color: #373030;
+    }
+    .water-section .graph canvas, .light-section .graph canvas, .environment-section .graph canvas {
+        margin-top: 0 !important;
+        margin-bottom: 5px !important;
+    }
+    /* Environment */
+    .environment-section .icon-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 100px;
+        margin-bottom: 15px;
+        width: 100%;
+    }
+    .environment-section .icon-container .temperature-wrapper, .environment-section .icon-container .humidity-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50%;
+        height: 100%;
+    }
+    .environment-section .icon-container .temperature-wrapper p, .environment-section .icon-container .humidity-wrapper p {
+        color: #FFF;
+        font-size: 48px;
+    }
+    .environment-section .icon-container .temperature-wrapper img {
+        width: 18%;
+    }
+    .environment-section .icon-container .humidity-wrapper img {
+        width: 38%;
+    }
+    /* Topnav */
+    .topnav {
+        display: flex;
+        align-items: center;
+        height: 60px;
+        background-color: #2BCF4E;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        left: 0;
+        height: 60px;
+        z-index: 999;
+        padding: 15px 0;
+    }
+    .topnav a {
+        padding: 15px;
+        font-size: 27px;
+        color: #FFF;
+    }
+    .topnav h3 {
+        padding: 0;
+        margin: 0;
+        color: #FFF;
+        font-size: 27px;
+    }
+    /* Form */
+    .form {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .form label {
+        display: flex;
+        margin: 0 !important;
+        color: #373030;
+    }
+
+    .form input {
+        width: 100%;
+        height: 50px;
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 10px 20px rgb(0 0 0 / 19%), 0 6px 6px rgb(0 0 0 / 23%);
+        margin-bottom: 10px;
+        padding: 0 15px;
+    }
+
+    .form input:focus {
+        outline: none !important;
+    }
+
+    .form input:nth-child(4) {
+        margin-bottom: 20px;
+    }
+
+    .form .secondary-button:active, .form .secondary-button:focus {
+        outline: none !important;
+        border: none !important;
+        background-color: #525252;
+    }
+
+    .form .primary-button:active, .form .primary-button:focus {
+        outline: none !important;
+        border: none !important;
+        background-color: #009E22;
+    }
+
+    .form a {
+        margin: 5px 0;
+        color: #373030;
+    }
+    .form .underline {
+        color: #0043ff;
+        font-weight: bold;
+    }
+    /* Fonts */
+    @font-face {
+        font-family: 'Roboto';
+        src: url('../fonts/Roboto-Light.woff2') format('woff2'), url('Roboto-Light.woff') format('woff');
+        font-weight: 300;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Roboto';
+        src: url('../fonts/Roboto-Medium.woff2') format('woff2'), url('Roboto-Medium.woff') format('woff');
+        font-weight: 500;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Roboto';
+        src: url('../fonts/Roboto-Regular.woff2') format('woff2'), url('Roboto-Regular.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Roboto';
+        src: url('../fonts/Roboto-Italic.woff2') format('woff2'), url('Roboto-Italic.woff') format('woff');
+        font-weight: normal;
+        font-style: italic;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Roboto';
+        src: url('../fonts/Roboto-Bold.woff2') format('woff2'), url('Roboto-Bold.woff') format('woff');
+        font-weight: bold;
+        font-style: normal;
+        font-display: swap;
+    }
+}
+/* ======================================= */
+/*               Animations                */
+/* ======================================= */
+.water-section .graph, .light-section .graph, .environment-section .graph, .water-section img, .light-section img, .overview-section .list li {
+    animation: popIn 0.6s ease;
+    animation-fill-mode: both !important;
+    width: 100%;
+}
+.water-section .graph:nth-child(1) {animation-delay: 0s;}
+.water-section .graph:nth-child(2) {animation-delay: 0.2s;}
+.water-section .graph:nth-child(3) {animation-delay: 0.4s;}
+.overview-section .list li:nth-child(1) {animation-delay: 0s;}
+.overview-section .list li:nth-child(2) {animation-delay: 0.2s;}
+.overview-section .list li:nth-child(3) {animation-delay: 0.4s;}
+@keyframes popIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+
+    70% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

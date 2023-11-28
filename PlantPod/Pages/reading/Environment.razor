@@ -1,0 +1,90 @@
+﻿@page "/reading/environment"
+@using Microsoft.AspNetCore.Mvc
+@using System.Collections.Generic
+@using Microsoft.Extensions.Configuration
+@using System
+@inject IJSRuntime JS
+@inject NavigationManager NavManager
+@inject Data.Arduino arduino
+@inject Data.User user
+
+<div class="topnav">
+    <a href="overview"><i class="fas fa-chevron-left"></i></a>
+    <h3>Omgeving</h3>
+</div>
+<div class="environment-section">
+    @if (imageSource is not null)
+    {
+        <div class="icon-container">
+            <div class="temperature-wrapper">
+                <img src="@imageSource" />
+                <p>@latestTemperature°C</p>
+            </div>
+            <div class="humidity-wrapper">
+                <img src="img/humidity_icon.png">
+                <p>@latestHumidity%</p>
+            </div>
+        </div>
+    }
+    <div class="graph">
+        <h4>Temperatuur lezing</h4>
+        <canvas class="my-4 h-25" id="temperatureGraph"></canvas>
+    </div>
+    <div class="graph">
+        <h4>Vochtigheid</h4>
+        <canvas class="my-4 h-25" id="humidityGraph"></canvas>
+    </div>
+</div>
+
+
+@code {
+    private string Message { get; set; }
+    private string? imageSource;
+    private int thermostatAmount;
+    private int latestTemperature;
+    private int latestHumidity;
+
+    private async void displayGraph(List<string> labels, List<decimal> readingData, string elementid)
+    {
+        // Try to call the javascript function and otherwise save the errormessage
+        try
+        {
+            // The first parameter is the function name in javascript and the rest are additional paremeters
+            Message = await JS.InvokeAsync<string>("ShowGraph", labels, readingData, elementid);
+        }
+        catch (JSException ex)
+        {
+            Message = ex.Message;
+        }
+    }
+
+    // Wait untill everything is done loading before we call in any javascript to prevent errors
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            // Get graph data and display
+            var data = await arduino.loadData("temperatureGraph", "temperature", 10);
+            displayGraph(data.Item1, data.Item2, data.Item3);
+            var data1 = await arduino.loadData("humidityGraph", "humidity", 10);
+            displayGraph(data1.Item1, data1.Item2, data1.Item3);
+            await JS.InvokeAsync<string>("showNavmenu", false);
+
+            // Check if user is logged in otherwise send to login
+            if (!user.CheckLogin())
+            {
+                NavManager.NavigateTo("/login");
+            }
+
+            // Grab latest value and calculate to display according image
+            latestHumidity = await arduino.latestValue("humidity") / 10;
+            latestTemperature = await arduino.latestValue("temperature");
+            thermostatAmount = latestTemperature / 102;
+            imageSource = $"img/temperature/temperature-{thermostatAmount}.png";
+            latestTemperature = latestTemperature / 24;
+
+            // Refresh html
+            StateHasChanged();
+        }
+    }
+}

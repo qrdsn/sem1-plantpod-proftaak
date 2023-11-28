@@ -1,0 +1,59 @@
+﻿@page "/settings"
+@using DataLibrary
+@using PlantPod.Models
+@using Microsoft.Extensions.Configuration
+@inject IDataAccess _data
+@inject IConfiguration _config
+@inject IJSRuntime JS
+@inject NavigationManager NavManager
+@inject Data.Arduino arduino
+@inject Data.User user
+
+<div class="settings-section">
+    <h3>Instellingen</h3>
+    @if (succes) {
+        <div class="alert alert-primary" role="alert">
+            <p>Naam aangepast!</p>
+        </div>
+    }
+    <div class="form">
+        <label for="plantname">Plantnaam aanpassen</label>
+        <input type="text" name="plantname" @bind="inputPlantName" placeholder="@currentPlantName"/>
+        <button class="primary-button" @onclick="changePlantName">Aanpassen</button>
+    </div>
+    <button class="warning-button" @onclick="logOut">Uitloggen</button>
+</div>
+
+@code {
+    private string inputPlantName;
+    private string currentPlantName;
+    private bool succes;
+
+    private async void logOut() {
+        // log the user out and send to login
+        user.logoutUser();
+        NavManager.NavigateTo("/");
+    }
+
+    private async Task changePlantName() {
+        // Change plant name with given data and save if it was a succes or not to display
+        succes = await arduino.changePlantName(inputPlantName, user.getId());
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            // Check if user is logged in otherwise send to login
+            if (!user.CheckLogin()) {
+                NavManager.NavigateTo("/login");
+            }
+            // Grab plant data to display
+            currentPlantName = await arduino.getPlantName(user.getId());
+            await JS.InvokeAsync<string>("showNavmenu", true);
+
+            // Refresh html
+            StateHasChanged();
+        }
+    }
+}
